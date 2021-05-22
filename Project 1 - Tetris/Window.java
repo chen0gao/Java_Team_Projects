@@ -17,7 +17,7 @@ import java.util.TimerTask;
 // Window
 // Game Window Class
 public class Window extends JPanel implements KeyListener {
-    private JFrame window = new JFrame("Game Window"); //Global
+    private JFrame window = new JFrame("Tetris Game Window"); //Global
 //    Create a data instance, handling backend
     Data data = new Data();
 
@@ -49,9 +49,9 @@ public class Window extends JPanel implements KeyListener {
             data.move("down");
         }
         //Check if the block hits bottom
-//        if(data.check("bottom")) {
-//            data.fixed();
-//        }
+        if(data.check("bottom")) {
+            data.fixed();
+        }
         this.invalidate();
         this.validate();
         this.repaint();

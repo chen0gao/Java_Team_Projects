@@ -34,9 +34,8 @@ public class KeyBoard {
         }
 
         //Check if hit bottom
-//        if(data.check("bottom")) {
-//            data.fixed();
-//        }
+        if(data.check("bottom")) {
+            data.fixed();
+        }
     }
 }
-        j

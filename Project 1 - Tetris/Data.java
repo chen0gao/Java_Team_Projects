@@ -13,7 +13,10 @@ public class Data {
         };
         cur_row = 0;
         cur_col = 2;
+
+        // test, set 9-2 a pre fixed block
         system[9][2] = 10;
+
         render_block();
     }
 
@@ -72,8 +75,15 @@ public class Data {
 
 //    Once hit bottom, set the blocks into fixed, then start a new block
     public void fixed() {
-        system[cur_row][cur_col] = 10;
+        for(int row = 0; row < cur_block.length; row++){
+            for (int col = 0; col < cur_block[row].length; col++){
+                if(cur_block[row][col] == 1)
+                    system[cur_row+row][cur_col+col] = 10;
+            }
+        }
         init();
+        // system[cur_row][cur_col] = 10;
+        // init();
     }
 
 //    Check if a direction is overlapping
@@ -97,14 +107,38 @@ public class Data {
                 if(check_overlap(cur_row+1,cur_col))
                 result = true;
                 break;
-//            case "bottom":
-//                if(cur_row==system.length-1 //Hit the bottom
-//                        ||
-//                   system[cur_row+1][cur_col]==10) // || next row block is gray already
-//                result = true;
-//                break;
+            case "bottom":
+                if(hits_ground() || hits_gray()) //Hit the bottom
+                    result = true;
+                break;
         }
         return result;
+    }
+
+    // check if it hits the ground
+    public static boolean hits_ground(){
+        for(int row = 0; row < cur_block.length; row++){
+            for (int col = 0; col < cur_block[row].length; col++) {
+                if(cur_block[row][col]==0)
+                    continue; //skip empty block
+                if (cur_row + row == system.length - 1)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    // check if it hits the gray part
+    public static boolean hits_gray(){
+        for(int row = 0; row < cur_block.length; row++){
+            for (int col = 0; col < cur_block[row].length; col++) {
+                if(cur_block[row][col]==0)
+                    continue; //skip empty block
+                if (system[cur_row + row + 1][cur_col + col] == 10)
+                    return true;
+            }
+        }
+        return false;
     }
 
 //    Move the block
@@ -137,6 +171,11 @@ public class Data {
         }
 //        system[cur_row][cur_col] = 1;
         render_block();
+    }
+
+    // random function to generate random numbers
+    public int random_num(int range, int start_num){
+        return (int) (Math.random() * range) + start_num;
     }
 
 }
