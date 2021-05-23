@@ -56,18 +56,25 @@ public class Data {
                     continue;
                 }
 
+
+                //Check Left Boundary
                 if (new_col + col < 0) {
                     pass = false;
                     continue;
                 }
 
-                //Check Left
+                //If first column is all zero, still to move to left
+                if (new_col < 0) {
+                    continue;
+                }
+
+                //Check Right Boundary
                 if (new_col + col > system[0].length - 1) {
                     pass = false;
                     continue;
                 }
 
-                //Check Right
+                //Check every new block if there is value > 2 (overlapping)
                 if (system[new_row + row][new_col + col] + cur_block[row][col] > 2) {
                     pass = false;
                 }
@@ -154,6 +161,8 @@ public class Data {
                 if (cur_row + row > system.length - 1)
                     continue; //skip the index that's outside of game window 5x10 array
                 if (cur_col + col > system[0].length - 1)
+                    continue; //skip the index that's outside of game window 5x10 array
+                if (cur_col + col < 0)
                     continue; //skip the index that's outside of game window 5x10 array
                 if (system[cur_row + row][cur_col + col] == 10)
                     continue; //skip the index that already contains fixed block
