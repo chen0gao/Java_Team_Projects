@@ -23,7 +23,8 @@ public class KeyBoard {
         }
         else if(e.getKeyCode()== KeyEvent.VK_UP) {
             if(data.check("up")) {
-                data.move("up");
+                data.rotate();
+                // data.move("up");
             }
         }
         else if(e.getKeyCode()== KeyEvent.VK_DOWN) {
