@@ -10,7 +10,7 @@ public class KeyBoard {
 
 //    Key board pressed event
     public static void keyPressed(KeyEvent e,Data data) {
-        System.out.println("keyPressed");
+//        System.out.println("keyPressed");
         if(e.getKeyCode()== KeyEvent.VK_RIGHT) {
             if(data.check("right")) {
                 data.move("right");

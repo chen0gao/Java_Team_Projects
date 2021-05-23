@@ -4,7 +4,8 @@ public class Data {
     public static int[][] system = new int[13][5];
     public static int cur_row = 0; //current block row index
     public static int cur_col = 1; //current block column index
-    public static int[][] cur_block = new int[3][3]; //block array
+    public static int[][] cur_block = new int[3][3]; //real block array
+    public static int[][] temp_block = new int[3][3]; //temp block array check for movement & rotation
     public static int current_shape = 0;
     public static int current_rotation_type = 0;
 
@@ -39,9 +40,9 @@ public class Data {
     static boolean check_overlap(int new_row, int new_col) {
 
         boolean pass = true;
-        for (int row = 0; row < cur_block.length; row++) {
-            for (int col = 0; col < cur_block[row].length; col++) {
-                if (cur_block[row][col] == 0)
+        for (int row = 0; row < temp_block.length; row++) {
+            for (int col = 0; col < temp_block[row].length; col++) {
+                if (temp_block[row][col] == 0)
                     continue; //skip empty block
 
                 //Check top
@@ -59,6 +60,7 @@ public class Data {
 
                 //Check Left Boundary
                 if (new_col + col < 0) {
+                    System.out.println("[Warning] Will leave left boundary");
                     pass = false;
                     continue;
                 }
@@ -70,12 +72,13 @@ public class Data {
 
                 //Check Right Boundary
                 if (new_col + col > system[0].length - 1) {
+                    System.out.println("[Warning] Will leave right boundary");
                     pass = false;
                     continue;
                 }
 
                 //Check every new block if there is value > 2 (overlapping)
-                if (system[new_row + row][new_col + col] + cur_block[row][col] > 2) {
+                if (system[new_row + row][new_col + col] + temp_block[row][col] > 2) {
                     pass = false;
                 }
 
@@ -101,6 +104,7 @@ public class Data {
     //    Check if a direction is overlapping
     static boolean check(String direction) {
         boolean result = false;
+        temp_block = cur_block;
 
         switch (direction) {
             case "right":
@@ -235,6 +239,7 @@ public class Data {
                     {0, 1, 0},
                     {0, 1, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 1;
@@ -247,6 +252,7 @@ public class Data {
                     {1, 1, 1},
                     {0, 0, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 2;
@@ -263,6 +269,7 @@ public class Data {
                     {0, 1, 1},
                     {0, 1, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 1;
@@ -275,6 +282,7 @@ public class Data {
                     {1, 1, 0},
                     {0, 1, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 2;
@@ -287,6 +295,7 @@ public class Data {
                     {1, 1, 0},
                     {0, 0, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 3;
@@ -299,6 +308,7 @@ public class Data {
                     {0, 1, 1},
                     {0, 0, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 4;
@@ -315,6 +325,7 @@ public class Data {
                     {0, 1, 0},
                     {0, 1, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 1;
@@ -327,6 +338,7 @@ public class Data {
                     {1, 1, 1},
                     {0, 0, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 2;
@@ -339,6 +351,7 @@ public class Data {
                     {0, 1, 0},
                     {0, 1, 1}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 3;
@@ -351,6 +364,7 @@ public class Data {
                     {1, 1, 1},
                     {1, 0, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 4;
@@ -367,6 +381,7 @@ public class Data {
                     {0, 1, 0},
                     {0, 1, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 1;
@@ -379,6 +394,7 @@ public class Data {
                     {1, 1, 1},
                     {0, 0, 1}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 2;
@@ -391,6 +407,7 @@ public class Data {
                     {0, 1, 0},
                     {1, 1, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 3;
@@ -403,6 +420,7 @@ public class Data {
                     {1, 1, 1},
                     {0, 0, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 4;
@@ -419,6 +437,7 @@ public class Data {
                     {0, 1, 0},
                     {0, 1, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 1;
@@ -431,6 +450,7 @@ public class Data {
                     {1, 1, 1},
                     {0, 0, 1}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 2;
@@ -443,6 +463,7 @@ public class Data {
                     {0, 1, 0},
                     {1, 1, 1}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 3;
@@ -455,6 +476,7 @@ public class Data {
                     {1, 1, 1},
                     {1, 0, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 4;
@@ -471,6 +493,7 @@ public class Data {
                     {1, 1, 0},
                     {1, 1, 0}
             };
+            temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
                 cur_block = new_block;
                 current_rotation_type = 1;
