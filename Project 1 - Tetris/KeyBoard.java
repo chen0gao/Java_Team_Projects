@@ -10,7 +10,6 @@ public class KeyBoard {
 
 //    Key board pressed event
     public static void keyPressed(KeyEvent e,Data data) {
-//        System.out.println("keyPressed");
         if(e.getKeyCode()== KeyEvent.VK_RIGHT) {
             if(data.check("right")) {
                 data.move("right");
@@ -23,6 +22,7 @@ public class KeyBoard {
         }
         else if(e.getKeyCode()== KeyEvent.VK_UP) {
             if(data.check("up")) {
+        System.out.println("keyPressed - UP");
                 data.rotate();
                 // data.move("up");
             }
