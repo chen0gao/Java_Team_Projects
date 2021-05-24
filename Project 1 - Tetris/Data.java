@@ -1,5 +1,6 @@
 import java.util.concurrent.ThreadLocalRandom;
 
+// Data Class to acess the backend info
 public class Data {
     public static int[][] system = new int[13][5];
     public static int cur_row = 0; //current block row index
