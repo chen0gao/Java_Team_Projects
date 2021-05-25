@@ -89,7 +89,8 @@ public class Data {
         return pass;
     }
 
-    //    Once hit bottom, set the blocks into fixed, then start a new block
+    //    Once hit bottom, set the blocks into fixed
+    //    check if any row need to be cleared, then start a new block
     public void fixed() {
         for (int row = 0; row < cur_block.length; row++) {
             for (int col = 0; col < cur_block[row].length; col++) {
@@ -97,6 +98,7 @@ public class Data {
                     system[cur_row + row][cur_col + col] = 10;
             }
         }
+        check_all_rows();
         init();
         // system[cur_row][cur_col] = 10;
         // init();
@@ -557,6 +559,53 @@ public class Data {
         }
     }
 
+    // check if there is a line filled fully with blocks
+    // return true if it is filled with block and need to clear
+    // return false if there is some empty space
+    public boolean filled(int current_row){
+        // i = 5 because there are 5 blocks in a row.
+        for(int i = 0; i < 5; i++){
+            if(system[current_row][i] != 10) {
+                // System.out.println(current_row + " will not need to be cleared");
+                return false;
+            }
+        }
+        // System.out.println(current_row + " need to clear");
+        return true;
+    }
 
+    // to check if the line is filled with blocks
+    public void check_all_rows(){
+        boolean all_clear = false;
+        while(!all_clear){
+            // 13 columns, 5 rows
+            for (int i = 0; i < 13; i++){
+                boolean need_clear = filled(i);
+                if(need_clear){
+                    clear(i);
+                    all_clear = false;
+                    break;
+                }
+                else
+                    all_clear = true;
+            }
+        }
+    }
 
+    // clear the line which is filled with blocks
+    public void clear(int current_row){
+        int[][] temp = new int[current_row][5];
+        for (int i = 0; i < current_row; i++){
+            for (int j = 0; j < 5; j++){
+                temp[i][j] = system[i][j];
+            }
+        }
+        for (int i = 1; i <= current_row; i++){
+            for (int j = 0; j < 5; j++){
+                system[i][j] = temp[i - 1][j];
+            }
+        }
+        for (int i = 0; i < 5; i++)
+            system[0][i] = 0;
+    }
 }
