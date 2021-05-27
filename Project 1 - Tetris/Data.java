@@ -284,8 +284,8 @@ public class Data {
         if(type_num == 2){
             int[][] new_block = new int[][]{
                     {0, 0, 0},
-                    {1, 1, 0},
-                    {0, 1, 0}
+                    {0, 1, 1},
+                    {0, 0, 1}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -296,9 +296,9 @@ public class Data {
         }
         if(type_num == 3){
             int[][] new_block = new int[][]{
-                    {0, 1, 0},
-                    {1, 1, 0},
-                    {0, 0, 0}
+                    {0, 0, 0},
+                    {0, 0, 1},
+                    {0, 1, 1}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -309,9 +309,9 @@ public class Data {
         }
         if(type_num == 4){
             int[][] new_block = new int[][]{
+                    {0, 0, 0},
                     {0, 1, 0},
-                    {0, 1, 1},
-                    {0, 0, 0}
+                    {0, 1, 1}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -438,8 +438,8 @@ public class Data {
     public void shape_5_types(int type_num){
         if(type_num == 1){
             int[][] new_block = new int[][]{
+                    {0, 0, 0},
                     {1, 1, 1},
-                    {0, 1, 0},
                     {0, 1, 0}
             };
             temp_block = new_block;
@@ -451,9 +451,9 @@ public class Data {
         }
         if(type_num == 2){
             int[][] new_block = new int[][]{
-                    {0, 0, 1},
-                    {1, 1, 1},
-                    {0, 0, 1}
+                    {0, 1, 0},
+                    {1, 1, 0},
+                    {0, 1, 0}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -465,8 +465,8 @@ public class Data {
         if(type_num == 3){
             int[][] new_block = new int[][]{
                     {0, 1, 0},
-                    {0, 1, 0},
-                    {1, 1, 1}
+                    {1, 1, 1},
+                    {0, 0, 0}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -477,9 +477,9 @@ public class Data {
         }
         if(type_num == 4){
             int[][] new_block = new int[][]{
-                    {1, 0, 0},
-                    {1, 1, 1},
-                    {1, 0, 0}
+                    {0, 1, 0},
+                    {0, 1, 1},
+                    {0, 1, 0}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
