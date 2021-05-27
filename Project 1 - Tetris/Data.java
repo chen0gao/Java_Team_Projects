@@ -1,5 +1,3 @@
-import java.util.concurrent.ThreadLocalRandom;
-
 // Data Class to acess the backend info
 public class Data {
     private static final int TOTLE_ROW = 13; // add more rows later
@@ -198,7 +196,7 @@ public class Data {
 
     // random function to generate random numbers
     public int random_num(int range, int start_num) {
-        return ThreadLocalRandom.current().nextInt(start_num,range);
+        return (int) (Math.random() * range) + start_num;
     }
 
     // randomly generate different shapes
