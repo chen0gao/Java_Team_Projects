@@ -1,7 +1,8 @@
-import java.util.concurrent.ThreadLocalRandom;
-
+// Data Class to acess the backend info
 public class Data {
-    public static int[][] system = new int[13][5];
+    private static final int TOTLE_ROW = 13; // add more rows later
+    private static final int TOTAL_COL = 5; // add more column later
+    public static int[][] system = new int[TOTLE_ROW][TOTAL_COL];
     public static int cur_row = 0; //current block row index
     public static int cur_col = 1; //current block column index
     public static int[][] cur_block = new int[3][3]; //real block array
@@ -17,8 +18,8 @@ public class Data {
         cur_col = 1;
         generate_shape();
 
-        // test, set 9-2 a pre fixed block
-        system[12][2] = 10;
+        // test, set 13-2 a pre fixed block
+        // system[13][2] = 10;
 
         render_block();
     }
@@ -90,7 +91,8 @@ public class Data {
         return pass;
     }
 
-    //    Once hit bottom, set the blocks into fixed, then start a new block
+    //    Once hit bottom, set the blocks into fixed
+    //    check if any row need to be cleared, then start a new block
     public void fixed() {
         for (int row = 0; row < cur_block.length; row++) {
             for (int col = 0; col < cur_block[row].length; col++) {
@@ -98,6 +100,7 @@ public class Data {
                     system[cur_row + row][cur_col + col] = 10;
             }
         }
+        check_all_rows();
         init();
         // system[cur_row][cur_col] = 10;
         // init();
@@ -175,8 +178,10 @@ public class Data {
             }
         }
     }
+
     //    Move the block
     public void move(String direction) {
+
         reset();
 
         switch (direction) {
@@ -199,7 +204,7 @@ public class Data {
 
     // random function to generate random numbers
     public int random_num(int range, int start_num) {
-        return ThreadLocalRandom.current().nextInt(start_num,range);
+        return (int) (Math.random() * range) + start_num;
     }
 
     // randomly generate different shapes
@@ -285,8 +290,8 @@ public class Data {
         if(type_num == 2){
             int[][] new_block = new int[][]{
                     {0, 0, 0},
-                    {1, 1, 0},
-                    {0, 1, 0}
+                    {0, 1, 1},
+                    {0, 0, 1}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -297,9 +302,9 @@ public class Data {
         }
         if(type_num == 3){
             int[][] new_block = new int[][]{
-                    {0, 1, 0},
-                    {1, 1, 0},
-                    {0, 0, 0}
+                    {0, 0, 0},
+                    {0, 0, 1},
+                    {0, 1, 1}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -310,9 +315,9 @@ public class Data {
         }
         if(type_num == 4){
             int[][] new_block = new int[][]{
+                    {0, 0, 0},
                     {0, 1, 0},
-                    {0, 1, 1},
-                    {0, 0, 0}
+                    {0, 1, 1}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -439,8 +444,8 @@ public class Data {
     public void shape_5_types(int type_num){
         if(type_num == 1){
             int[][] new_block = new int[][]{
+                    {0, 0, 0},
                     {1, 1, 1},
-                    {0, 1, 0},
                     {0, 1, 0}
             };
             temp_block = new_block;
@@ -452,9 +457,9 @@ public class Data {
         }
         if(type_num == 2){
             int[][] new_block = new int[][]{
-                    {0, 0, 1},
-                    {1, 1, 1},
-                    {0, 0, 1}
+                    {0, 1, 0},
+                    {1, 1, 0},
+                    {0, 1, 0}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -466,8 +471,8 @@ public class Data {
         if(type_num == 3){
             int[][] new_block = new int[][]{
                     {0, 1, 0},
-                    {0, 1, 0},
-                    {1, 1, 1}
+                    {1, 1, 1},
+                    {0, 0, 0}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -478,9 +483,9 @@ public class Data {
         }
         if(type_num == 4){
             int[][] new_block = new int[][]{
-                    {1, 0, 0},
-                    {1, 1, 1},
-                    {1, 0, 0}
+                    {0, 1, 0},
+                    {0, 1, 1},
+                    {0, 1, 0}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -569,9 +574,55 @@ public class Data {
                 next_rotation = 1;
             shape_6_types(next_rotation);
         }
-        render_block(); //Render the block once rotated
+
+        render_block();
     }
 
+    // check if there is a line filled fully with blocks
+    // return true if it is filled with block and need to clear
+    // return false if there is some empty space
+    public boolean filled(int current_row){
+        for(int i = 0; i < TOTAL_COL; i++){
+            if(system[current_row][i] != 10) {
+                // System.out.println(current_row + " will not need to be cleared");
+                return false;
+            }
+        }
+        // System.out.println(current_row + " need to clear");
+        return true;
+    }
 
+    // to check if the line is filled with blocks
+    public void check_all_rows(){
+        boolean all_clear = false;
+        while(!all_clear){
+            for (int i = 0; i < TOTLE_ROW; i++){
+                boolean need_clear = filled(i);
+                if(need_clear){
+                    clear(i);
+                    all_clear = false;
+                    break;
+                }
+                else
+                    all_clear = true;
+            }
+        }
+    }
 
+    // clear the line which is filled with blocks
+    public void clear(int current_row){
+        int[][] temp = new int[current_row][TOTAL_COL];
+        for (int i = 0; i < current_row; i++){
+            for (int j = 0; j < TOTAL_COL; j++){
+                temp[i][j] = system[i][j];
+            }
+        }
+        for (int i = 1; i <= current_row; i++){
+            for (int j = 0; j < TOTAL_COL; j++){
+                system[i][j] = temp[i - 1][j];
+            }
+        }
+        for (int i = 0; i < TOTAL_COL; i++)
+            system[0][i] = 0;
+    }
 }
