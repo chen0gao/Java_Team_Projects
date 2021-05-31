@@ -22,7 +22,6 @@ public class KeyBoard {
         }
         else if(e.getKeyCode()== KeyEvent.VK_UP) {
             if(data.check("up")) {
-        System.out.println("keyPressed - UP");
                 data.rotate();
                 // data.move("up");
             }

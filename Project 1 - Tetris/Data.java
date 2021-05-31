@@ -8,6 +8,8 @@ public class Data {
     public static int[][] temp_block = new int[3][3]; //temp block array check for movement & rotation
     public static int current_shape = 0;
     public static int current_rotation_type = 0;
+    public static long rotate_time = System.nanoTime();
+    public static double rotate_time_cooldown = 200; //Cooldown to rotate, in ms
 
     //    Initialize the game
     public void init() {
@@ -157,8 +159,7 @@ public class Data {
         return false;
     }
 
-    //    Move the block
-    public void move(String direction) {
+    public void reset() {
         //reset 3 x 3 to 0
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
@@ -173,6 +174,11 @@ public class Data {
                 system[cur_row + row][cur_col + col] = 0;
             }
         }
+    }
+    //    Move the block
+    public void move(String direction) {
+        reset();
+
         switch (direction) {
             case "right":
                 cur_col = cur_col + 1;
@@ -504,7 +510,16 @@ public class Data {
 
     // Rotate
     public void rotate(){
+        System.out.println((System.nanoTime()-rotate_time)/1000000);
+        if((System.nanoTime()-rotate_time)/1000000>=rotate_time_cooldown) {
+            rotate_time = System.nanoTime();
+        } else {
+            return;
+        }
+
         int max_type;
+        reset();
+
         if(current_shape == 1)
             max_type = 2;
         else if(current_shape == 2 || current_shape == 3 ||
@@ -554,6 +569,7 @@ public class Data {
                 next_rotation = 1;
             shape_6_types(next_rotation);
         }
+        render_block(); //Render the block once rotated
     }
 
 
