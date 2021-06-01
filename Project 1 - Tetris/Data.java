@@ -12,6 +12,8 @@ public class Data {
     public static long rotate_time = System.nanoTime();
     public static double rotate_time_cooldown = 200; //Cooldown to rotate, in ms
 
+    public static boolean game_pause = false; //Pause the game
+
     //    Initialize the game
     public void init() {
         cur_row = 0;

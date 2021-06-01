@@ -11,10 +11,30 @@ public class UI {
 
 //    Paint the game board based on the backend
     public static void paintBoard(Graphics cube,Data data) {
+
         int[][] system = data.system;
 
-        int init_x = 25;
-        int init_y = 25;
+        int init_x = 25; //initial x of game window
+        int init_y = 25; //initial y of game window
+        int w = 25; //width of block
+        int h = 25; //height of block
+		int window_w = w*system[0].length; //width of game window
+		int window_h = h*system.length; //height of game window
+        
+    	//Pause Game
+    	if(data.game_pause==true) {
+    		
+            cube.setColor(Color.BLACK);
+            cube.fillRect(init_x, init_y, window_w, window_h);
+            cube.setColor(Color.WHITE);
+            cube.setFont(new Font("TimesRoman", Font.PLAIN, 24)); 
+            
+            int text_x_offset = 30;
+            cube.drawString("Paused", init_x+window_w/2 - text_x_offset, init_y+window_h/2);
+    		return;
+    	}
+    	
+    	//Unpause Game
 
         for (int row = 0; row < system.length; row++) {
             for (int col = 0; col < system[row].length; col++) {
@@ -26,8 +46,6 @@ public class UI {
                 } else if (system[row][col] == 10) {
                     cube.setColor(Color.GRAY);
                 }
-                int w = 25;
-                int h = 25;
                 int x = init_x + w * col;
                 int y = init_y + h * row;
                 cube.fillRect(x, y, w, h);

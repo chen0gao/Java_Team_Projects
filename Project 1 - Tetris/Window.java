@@ -35,7 +35,9 @@ public class Window extends JPanel implements KeyListener {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                moveDown();
+            	if(data.game_pause==false) {
+                    moveDown();
+            	}
             }
         };
         Timer t = new Timer();
