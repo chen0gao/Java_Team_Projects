@@ -26,7 +26,7 @@ public class Window extends JPanel implements KeyListener {
     public void create() {
         data.init();
         window.add(this);
-        window.setSize(400, 400);
+        window.setSize(500, 500);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         window.setVisible(true);

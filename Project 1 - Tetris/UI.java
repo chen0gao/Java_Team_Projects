@@ -22,19 +22,28 @@ public class UI {
 		int window_h = h*system.length; //height of game window
 
         // right side Information (scores, pause instruction, level etc...)
-
-        // font for the word "Score"
         int right_side_init_x = 50 + window_w;
         int right_side_init_y = 50;
 
+        // print word "NEXT"
+        cube.setFont(new Font("TimesRoman", Font.BOLD,20));
+        cube.drawString("NEXT",right_side_init_x + 55,right_side_init_y - 8);
+
+        // grid
+        int grid_w = 25 * 3;
+        int grid_h = 25 * 3;
+        cube.setColor(Color.BLACK);
+        cube.fillRect(right_side_init_x + 55, right_side_init_y, grid_w, grid_h);
+
+        // font for the word "Score"
         cube.setColor(Color.BLACK);
         cube.setFont(new Font("TimesRoman", Font.BOLD,30));
         int score_x_offset = 50;
-        cube.drawString("SCORE",right_side_init_x + score_x_offset,right_side_init_y);
+        cube.drawString("SCORE",right_side_init_x + score_x_offset,right_side_init_y + 165);
 
         // font for the numeric score
         int numberic_score_offset = 60;
-        int current_score_y_offset = 35;
+        int current_score_y_offset = 190;
         cube.setFont(new Font("TimesRoman", Font.BOLD,20));
         String current_score;
         if(data.score < 10)
@@ -56,18 +65,18 @@ public class UI {
 
         // print word level
         int level_x_offset = 50;
-        int level_y_offset = 90;
+        int level_y_offset = 265;
         cube.setFont(new Font("TimesRoman", Font.BOLD,30));
         cube.drawString("LEVEL",right_side_init_x + level_x_offset,right_side_init_y + level_y_offset);
 
         // print current level
         cube.setFont(new Font("TimesRoman", Font.BOLD,20));
-        cube.drawString("reserve level",right_side_init_x + score_x_offset,right_side_init_y + 125);
+        cube.drawString("reserve level",right_side_init_x + score_x_offset,right_side_init_y + 290);
 
         // noticing press space for pause
         cube.setFont(new Font("TimesRoman", Font.BOLD,20));
-        cube.drawString("PRESS SPACEBAR",right_side_init_x + 10,right_side_init_y + 200);
-        cube.drawString("TO PAUSE",right_side_init_x + 50,right_side_init_y + 230);
+        cube.drawString("PRESS SPACEBAR",right_side_init_x + 10,right_side_init_y + 360);
+        cube.drawString("TO PAUSE",right_side_init_x + 50,right_side_init_y + 380);
 
         // return to the default font
         cube.setColor(Color.BLACK);
@@ -137,10 +146,10 @@ public class UI {
         //int x = window.getX();
         //int y = window.getY();
         cube.setColor(Color.BLACK);
-        cube.fillRect(0, 0, 400, 400);
+        cube.fillRect(0, 0, 500, 500);
         cube.setColor(Color.lightGray);
-        cube.setFont(new Font("TimesRoman", Font.BOLD, 35));
+        cube.setFont(new Font("TimesRoman", Font.BOLD, 40));
 
-        cube.drawString("Game Over!",100,200);
+        cube.drawString("Game Over",150,240);
     }
 }

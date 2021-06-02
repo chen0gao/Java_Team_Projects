@@ -1,7 +1,7 @@
 // Data Class to acess the backend info
 public class Data {
-    private static final int TOTLE_ROW = 13; // add more rows later
-    private static final int TOTAL_COL = 5; // add more column later
+    private static final int TOTLE_ROW = 16; // add more rows later
+    private static final int TOTAL_COL = 8; // add more column later
     public static int[][] system = new int[TOTLE_ROW][TOTAL_COL];
     public static int cur_row = 0; //current block row index
     public static int cur_col = 1; //current block column index
@@ -21,7 +21,7 @@ public class Data {
     // true for overlapped, false for not overlapped
     public void init() {
         cur_row = 0;
-        cur_col = 1;
+        cur_col = 2;
         generate_shape();
 
         // System.out.println("Current Score: " + score);
