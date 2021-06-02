@@ -20,6 +20,7 @@ public class Data {
     public static boolean init_overlap;
 
     public static int score;
+    public static int level;
 
     //    Initialize the game
     // true for overlapped, false for not overlapped
@@ -40,6 +41,16 @@ public class Data {
             generate_next_shape();
             // System.out.println("NOT Initial");
         }
+
+        // set difficulties / level
+        if(score < 2000) // 2000
+            level = 1;
+        else if(score < 5000) // 5000
+            level = 2;
+        else if(score < 10000) // 10000
+            level = 3;
+        else
+            level = 4;
 
         // System.out.println("Current Score: " + score);
         // test, set 13-2 a pre fixed block
@@ -94,7 +105,7 @@ public class Data {
 
                 //Check Left Boundary
                 if (new_col + col < 0) {
-                    System.out.println("[Warning] Will leave left boundary");
+                    // System.out.println("[Warning] Will leave left boundary");
                     pass = false;
                     continue;
                 }
@@ -106,7 +117,7 @@ public class Data {
 
                 //Check Right Boundary
                 if (new_col + col > system[0].length - 1) {
-                    System.out.println("[Warning] Will leave right boundary");
+                    // System.out.println("[Warning] Will leave right boundary");
                     pass = false;
                     continue;
                 }

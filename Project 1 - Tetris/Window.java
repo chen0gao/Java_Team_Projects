@@ -21,6 +21,7 @@ public class Window extends JPanel implements KeyListener {
 //    Create a data instance, handling backend
     Data data = new Data();
 
+private int period = 1000;
 
     // Create a Game Window instance
     public void create() {
@@ -31,6 +32,8 @@ public class Window extends JPanel implements KeyListener {
 
         window.setVisible(true);
 
+        timer_update();
+        /*
         // Create a timer
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -41,7 +44,52 @@ public class Window extends JPanel implements KeyListener {
             }
         };
         Timer t = new Timer();
-        t.schedule(timerTask, 1000,1000);
+        t.schedule(timerTask, 1000, period);
+         */
+    }
+
+    public void timer_update(){
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(data.game_pause==false) {
+                    moveDown();
+                }
+                if(Data.level == 1)
+                    period = 1000;
+                if(Data.level == 2)
+                    period = 800;
+                if(Data.level == 3)
+                    period = 500;
+                if(Data.level == 4)
+                    period = 200;
+                t.cancel();
+                timer_update();
+            }
+        }, 1000, period);
+
+        /*
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if(data.game_pause==false) {
+                    moveDown();
+                }
+                if(Data.level == 1)
+                    period = 1000;
+                if(Data.level == 2)
+                    period = 800;
+                if(Data.level == 3)
+                    period = 500;
+                if(Data.level == 4)
+                    period = 200;
+                t.cancel();
+                timer_update();
+            }
+        };
+        t.schedule(timerTask, 1000, period);
+         */
     }
 
     // Function run by timer

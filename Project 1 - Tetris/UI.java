@@ -107,8 +107,14 @@ public class UI {
         cube.drawString("LEVEL",right_side_init_x + level_x_offset,right_side_init_y + level_y_offset);
 
         // print current level
-        cube.setFont(new Font("TimesRoman", Font.BOLD,20));
-        cube.drawString("reserve level",right_side_init_x + score_x_offset,right_side_init_y + 290);
+        cube.setFont(new Font("TimesRoman", Font.ITALIC,25));
+        String current_level = String.valueOf(Data.level);
+        if(Data.level == 4){
+            current_level = "MAX";
+            cube.drawString(current_level,right_side_init_x + score_x_offset + 20,right_side_init_y + 295);
+        }
+        else
+            cube.drawString(current_level,right_side_init_x + score_x_offset + 40,right_side_init_y + 295);
 
         // noticing press space for pause
         cube.setFont(new Font("TimesRoman", Font.BOLD,20));
