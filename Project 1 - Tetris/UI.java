@@ -21,6 +21,58 @@ public class UI {
 		int window_w = w*system[0].length; //width of game window
 		int window_h = h*system.length; //height of game window
 
+        // right side Information (scores, pause instruction, level etc...)
+
+        // font for the word "Score"
+        int right_side_init_x = 50 + window_w;
+        int right_side_init_y = 50;
+
+        cube.setColor(Color.BLACK);
+        cube.setFont(new Font("TimesRoman", Font.BOLD,30));
+        int score_x_offset = 50;
+        cube.drawString("SCORE",right_side_init_x + score_x_offset,right_side_init_y);
+
+        // font for the numeric score
+        int numberic_score_offset = 60;
+        int current_score_y_offset = 35;
+        cube.setFont(new Font("TimesRoman", Font.BOLD,20));
+        String current_score;
+        if(data.score < 10)
+            current_score = "000000";
+        else if(data.score < 100)
+            current_score = "00000";
+        else if(data.score < 1000)
+            current_score = "0000";
+        else if(data.score < 10000)
+            current_score = "000";
+        else if(data.score < 100000)
+            current_score = "00";
+        else if(data.score < 1000000)
+            current_score = "0";
+        else
+            current_score = "";
+        current_score += String.valueOf(data.score);
+        cube.drawString( current_score,right_side_init_x + numberic_score_offset,right_side_init_y + current_score_y_offset);
+
+        // print word level
+        int level_x_offset = 50;
+        int level_y_offset = 90;
+        cube.setFont(new Font("TimesRoman", Font.BOLD,30));
+        cube.drawString("LEVEL",right_side_init_x + level_x_offset,right_side_init_y + level_y_offset);
+
+        // print current level
+        cube.setFont(new Font("TimesRoman", Font.BOLD,20));
+        cube.drawString("reserve level",right_side_init_x + score_x_offset,right_side_init_y + 125);
+
+        // noticing press space for pause
+        cube.setFont(new Font("TimesRoman", Font.BOLD,20));
+        cube.drawString("PRESS SPACEBAR",right_side_init_x + 10,right_side_init_y + 200);
+        cube.drawString("TO PAUSE",right_side_init_x + 50,right_side_init_y + 230);
+
+        // return to the default font
+        cube.setColor(Color.BLACK);
+        cube.setFont(new Font("TimesRoman", Font.PLAIN,12));
+
     	//Pause Game
     	if(data.game_pause==true) {
     		

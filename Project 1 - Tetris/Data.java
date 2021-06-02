@@ -15,6 +15,8 @@ public class Data {
     public static boolean game_pause = false; //Pause the game
     public static boolean init_overlap;
 
+    public static int score;
+
     //    Initialize the game
     // true for overlapped, false for not overlapped
     public void init() {
@@ -22,6 +24,7 @@ public class Data {
         cur_col = 1;
         generate_shape();
 
+        // System.out.println("Current Score: " + score);
         // test, set 13-2 a pre fixed block
         // system[13][2] = 10;
 
@@ -606,11 +609,13 @@ public class Data {
 
     // to check if the line is filled with blocks
     public void check_all_rows(){
+        int line_cleared = 0;
         boolean all_clear = false;
         while(!all_clear){
             for (int i = 0; i < TOTLE_ROW; i++){
                 boolean need_clear = filled(i);
                 if(need_clear){
+                    line_cleared += 1;
                     clear(i);
                     all_clear = false;
                     break;
@@ -619,6 +624,15 @@ public class Data {
                     all_clear = true;
             }
         }
+
+        // if clear one line, +100, 2 lines +250, 3 lines 450
+        // for now. Might modify later with different levels (speeds)
+        if(line_cleared == 1)
+            score += 100;
+        else if(line_cleared == 2)
+            score += 250;
+        else if (line_cleared == 3)
+            score += 450;
     }
 
     // clear the line which is filled with blocks
