@@ -33,8 +33,8 @@ public class UI {
         int grid_w = 25 * 3;
         int grid_h = 25 * 3;
         cube.setColor(Color.BLACK);
-        cube.fillRect(right_side_init_x + 55, right_side_init_y, grid_w, grid_h);
-
+        createBorder(cube,right_side_init_x + 55, right_side_init_y, grid_w, grid_h);
+        
         // font for the word "Score"
         cube.setColor(Color.BLACK);
         cube.setFont(new Font("TimesRoman", Font.BOLD,30));
