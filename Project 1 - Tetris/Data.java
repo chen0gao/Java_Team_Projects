@@ -11,6 +11,7 @@ public class Data {
     public static int current_rotation_type = 0;
     public static long rotate_time = System.nanoTime();
     public static double rotate_time_cooldown = 200; //Cooldown to rotate, in ms
+    // public static boolean first_time = true;
 
     public static boolean game_pause = false; //Pause the game
     public static boolean init_overlap;

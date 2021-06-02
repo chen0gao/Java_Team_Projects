@@ -21,6 +21,14 @@ public class UI {
 		int window_w = w*system[0].length; //width of game window
 		int window_h = h*system.length; //height of game window
 
+        // create our own colors
+        Color color_1 = new Color(255,204,0); // orange
+        Color color_2 = new Color(230,230,0); // yellow
+        Color color_3 = new Color(102,255,153); // green
+        Color color_4 = new Color(102,140,255); // blue
+        Color color_5 = new Color(179,102,255); // violet
+        Color color_6 = new Color(255,0,0); // red
+
         // right side Information (scores, pause instruction, level etc...)
         int right_side_init_x = 50 + window_w;
         int right_side_init_y = 50;
@@ -34,6 +42,35 @@ public class UI {
         int grid_h = 25 * 3;
         cube.setColor(Color.BLACK);
         createBorder(cube,right_side_init_x + 55, right_side_init_y, grid_w, grid_h);
+
+        for(int row = 0; row < data.cur_block.length; row++){
+            for (int col = 0; col < data.cur_block[row].length; col ++){
+                if (data.cur_block[row][col] == 0) {
+                    cube.setColor(Color.WHITE);
+                } else if (data.cur_block[row][col] == 1 && Data.current_shape == 1) {
+                    cube.setColor(color_1);
+                } else if (data.cur_block[row][col] == 1 && Data.current_shape == 2) {
+                    cube.setColor(color_2);
+                } else if (data.cur_block[row][col] == 1 && Data.current_shape == 3) {
+                    cube.setColor(color_3);
+                } else if (data.cur_block[row][col] == 1 && Data.current_shape == 4) {
+                    cube.setColor(color_4);
+                } else if (data.cur_block[row][col] == 1 && Data.current_shape == 5) {
+                    cube.setColor(color_5);
+                } else if (data.cur_block[row][col] == 1 && Data.current_shape == 6) {
+                    cube.setColor(color_6);
+                }
+                int x = right_side_init_x + 55 + 25 * col;
+                int y = right_side_init_y + 25 * row;
+                cube.fillRect(x, y, w, h);
+            }
+        }
+        cube.setColor(Color.BLACK);
+        for(int row = right_side_init_x + 55; row < right_side_init_x + 55 + grid_w; row += 25){
+            for (int col = right_side_init_y; col < right_side_init_y + grid_h; col += 25){
+                createBorder(cube,row, col, 25, 25);
+            }
+        }
         
         // font for the word "Score"
         cube.setColor(Color.BLACK);
@@ -94,14 +131,6 @@ public class UI {
             cube.drawString("Paused", init_x+window_w/2 - text_x_offset, init_y+window_h/2);
     		return;
     	}
-
-    	// create our own colors
-    	Color color_1 = new Color(255,204,0); // orange
-        Color color_2 = new Color(230,230,0); // yellow
-        Color color_3 = new Color(102,255,153); // green
-        Color color_4 = new Color(102,140,255); // blue
-        Color color_5 = new Color(179,102,255); // violet
-        Color color_6 = new Color(255,0,0); // red
 
     	//Unpause Game
         for (int row = 0; row < system.length; row++) {
