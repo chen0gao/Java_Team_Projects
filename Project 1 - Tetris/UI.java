@@ -20,7 +20,7 @@ public class UI {
         int h = 25; //height of block
 		int window_w = w*system[0].length; //width of game window
 		int window_h = h*system.length; //height of game window
-        
+
     	//Pause Game
     	if(data.game_pause==true) {
     		
@@ -79,5 +79,16 @@ public class UI {
                 cube.drawString(String.valueOf(system[row][col]), x+w/2, y+h/2);
             }
         }
+    }
+
+    public static void gameOver(Graphics cube){//, JFrame window){
+        //int x = window.getX();
+        //int y = window.getY();
+        cube.setColor(Color.BLACK);
+        cube.fillRect(0, 0, 400, 400);
+        cube.setColor(Color.lightGray);
+        cube.setFont(new Font("TimesRoman", Font.BOLD, 35));
+
+        cube.drawString("Game Over!",100,200);
     }
 }

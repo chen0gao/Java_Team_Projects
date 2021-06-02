@@ -65,6 +65,9 @@ public class Window extends JPanel implements KeyListener {
         super.paintComponent(cube);
 
         UI.paintBoard(cube,data);
+
+        if(data.init_overlap)
+            UI.gameOver(cube);//,window);
     }
 
 //    Handle keyboard event

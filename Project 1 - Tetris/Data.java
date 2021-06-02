@@ -13,8 +13,10 @@ public class Data {
     public static double rotate_time_cooldown = 200; //Cooldown to rotate, in ms
 
     public static boolean game_pause = false; //Pause the game
+    public static boolean init_overlap;
 
     //    Initialize the game
+    // true for overlapped, false for not overlapped
     public void init() {
         cur_row = 0;
         cur_col = 1;
@@ -24,6 +26,13 @@ public class Data {
         // system[13][2] = 10;
 
         render_block();
+
+        if(check_overlap(cur_row+1,cur_col))
+            init_overlap = false;
+//            System.out.println("OK, does not overlap");
+        else
+            init_overlap = true;
+//            System.out.println("Overlapped!!");
     }
 
     //    print current block matrix into game matrix
@@ -103,7 +112,8 @@ public class Data {
             }
         }
         check_all_rows();
-        init();
+        if(!init_overlap)
+            init();
         // system[cur_row][cur_col] = 10;
         // init();
     }
