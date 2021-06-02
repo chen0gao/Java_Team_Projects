@@ -43,21 +43,21 @@ public class UI {
         cube.setColor(Color.BLACK);
         createBorder(cube,right_side_init_x + 55, right_side_init_y, grid_w, grid_h);
 
-        for(int row = 0; row < data.cur_block.length; row++){
-            for (int col = 0; col < data.cur_block[row].length; col ++){
-                if (data.cur_block[row][col] == 0) {
+        for(int row = 0; row < data.next_block.length; row++){
+            for (int col = 0; col < data.next_block[row].length; col ++){
+                if (data.next_block[row][col] == 0) {
                     cube.setColor(Color.WHITE);
-                } else if (data.cur_block[row][col] == 1 && Data.current_shape == 1) {
+                } else if (data.next_block[row][col] == 1 && Data.next_shape == 1) {
                     cube.setColor(color_1);
-                } else if (data.cur_block[row][col] == 1 && Data.current_shape == 2) {
+                } else if (data.next_block[row][col] == 1 && Data.next_shape == 2) {
                     cube.setColor(color_2);
-                } else if (data.cur_block[row][col] == 1 && Data.current_shape == 3) {
+                } else if (data.next_block[row][col] == 1 && Data.next_shape == 3) {
                     cube.setColor(color_3);
-                } else if (data.cur_block[row][col] == 1 && Data.current_shape == 4) {
+                } else if (data.next_block[row][col] == 1 && Data.next_shape == 4) {
                     cube.setColor(color_4);
-                } else if (data.cur_block[row][col] == 1 && Data.current_shape == 5) {
+                } else if (data.next_block[row][col] == 1 && Data.next_shape == 5) {
                     cube.setColor(color_5);
-                } else if (data.cur_block[row][col] == 1 && Data.current_shape == 6) {
+                } else if (data.next_block[row][col] == 1 && Data.next_shape == 6) {
                     cube.setColor(color_6);
                 }
                 int x = right_side_init_x + 55 + 25 * col;

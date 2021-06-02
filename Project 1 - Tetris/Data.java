@@ -6,12 +6,15 @@ public class Data {
     public static int cur_row = 0; //current block row index
     public static int cur_col = 1; //current block column index
     public static int[][] cur_block = new int[3][3]; //real block array
+    public static int[][] next_block = new int[3][3]; //next block array
     public static int[][] temp_block = new int[3][3]; //temp block array check for movement & rotation
-    public static int current_shape = 0;
-    public static int current_rotation_type = 0;
+    public static int current_shape;
+    public static int current_rotation_type;
+    public static int next_shape;
+    public static int next_rotation_type;
     public static long rotate_time = System.nanoTime();
     public static double rotate_time_cooldown = 200; //Cooldown to rotate, in ms
-    // public static boolean first_time = true;
+    public static boolean first_time = true;
 
     public static boolean game_pause = false; //Pause the game
     public static boolean init_overlap;
@@ -23,7 +26,20 @@ public class Data {
     public void init() {
         cur_row = 0;
         cur_col = 2;
-        generate_shape();
+
+        if(first_time) {
+            generate_shape();
+            first_time = false;
+            generate_next_shape();
+            // System.out.println("Initial");
+        }
+        else {
+            cur_block = next_block;
+            current_shape = next_shape;
+            current_rotation_type = next_rotation_type;
+            generate_next_shape();
+            // System.out.println("NOT Initial");
+        }
 
         // System.out.println("Current Score: " + score);
         // test, set 13-2 a pre fixed block
@@ -531,7 +547,7 @@ public class Data {
 
     // Rotate
     public void rotate(){
-        System.out.println((System.nanoTime()-rotate_time)/1000000);
+        // System.out.println((System.nanoTime()-rotate_time)/1000000);
         if((System.nanoTime()-rotate_time)/1000000>=rotate_time_cooldown) {
             rotate_time = System.nanoTime();
         } else {
@@ -652,4 +668,315 @@ public class Data {
         for (int i = 0; i < TOTAL_COL; i++)
             system[0][i] = 0;
     }
+
+
+//      GENERATE NEXT BLOCK
+    public void generate_next_shape() {
+        int num = random_num(6, 1);
+        // num = 6;// test
+        if (num == 1) {
+            int rotate_num = random_num(2,1);
+            shape_1_next_types(rotate_num);
+        }
+        if (num == 2) {
+            int rotate_num = random_num(4,1);
+            shape_2_next_types(rotate_num);
+        }
+        if (num == 3) {
+            int rotate_num = random_num(4,1);
+            shape_3_next_types(rotate_num);
+        }
+        if (num == 4) {
+            int rotate_num = random_num(4,1);
+            shape_4_next_types(rotate_num);
+        }
+        if (num == 5) {
+            int rotate_num = random_num(4,1);
+            shape_5_next_types(rotate_num);
+        }
+        if (num == 6) {
+            int rotate_num = 1;
+            shape_6_next_types(rotate_num);
+        }
+    }
+
+    // add rotation types for each shape
+
+    // rotation types for shape 1
+    // two types for shape 1
+    public void shape_1_next_types(int type_num){
+        if(type_num == 1){
+            int[][] new_block = new int[][]{
+                    {0, 1, 0},
+                    {0, 1, 0},
+                    {0, 1, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 1;
+                next_shape = 1;
+            }
+        }
+        if(type_num == 2){
+            int[][] new_block = new int[][]{
+                    {0, 0, 0},
+                    {1, 1, 1},
+                    {0, 0, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 2;
+                next_shape = 1;
+            }
+        }
+    }
+    // rotation types for shape 2
+    // 4 types for shape 2
+    public void shape_2_next_types(int type_num){
+        if(type_num == 1){
+            int[][] new_block = new int[][]{
+                    {0, 0, 0},
+                    {0, 1, 1},
+                    {0, 1, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 1;
+                next_shape = 2;
+            }
+        }
+        if(type_num == 2){
+            int[][] new_block = new int[][]{
+                    {0, 0, 0},
+                    {0, 1, 1},
+                    {0, 0, 1}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 2;
+                next_shape = 2;
+            }
+        }
+        if(type_num == 3){
+            int[][] new_block = new int[][]{
+                    {0, 0, 0},
+                    {0, 0, 1},
+                    {0, 1, 1}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 3;
+                next_shape = 2;
+            }
+        }
+        if(type_num == 4){
+            int[][] new_block = new int[][]{
+                    {0, 0, 0},
+                    {0, 1, 0},
+                    {0, 1, 1}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 4;
+                next_shape = 2;
+            }
+        }
+    }
+    // rotation types for shape 3
+    // 4 types for shape 3
+    public void shape_3_next_types(int type_num){
+        if(type_num == 1){
+            int[][] new_block = new int[][]{
+                    {1, 1, 0},
+                    {0, 1, 0},
+                    {0, 1, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 1;
+                next_shape = 3;
+            }
+        }
+        if(type_num == 2){
+            int[][] new_block = new int[][]{
+                    {0, 0, 1},
+                    {1, 1, 1},
+                    {0, 0, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 2;
+                next_shape = 3;
+            }
+        }
+        if(type_num == 3){
+            int[][] new_block = new int[][]{
+                    {0, 1, 0},
+                    {0, 1, 0},
+                    {0, 1, 1}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 3;
+                next_shape = 3;
+            }
+        }
+        if(type_num == 4){
+            int[][] new_block = new int[][]{
+                    {0, 0, 0},
+                    {1, 1, 1},
+                    {1, 0, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 4;
+                next_shape = 3;
+            }
+        }
+    }
+    // rotation types for shape 4
+    // 4 types for shape 4
+    public void shape_4_next_types(int type_num){
+        if(type_num == 1){
+            int[][] new_block = new int[][]{
+                    {0, 1, 1},
+                    {0, 1, 0},
+                    {0, 1, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 1;
+                next_shape = 4;
+            }
+        }
+        if(type_num == 2){
+            int[][] new_block = new int[][]{
+                    {0, 0, 0},
+                    {1, 1, 1},
+                    {0, 0, 1}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 2;
+                next_shape = 4;
+            }
+        }
+        if(type_num == 3){
+            int[][] new_block = new int[][]{
+                    {0, 1, 0},
+                    {0, 1, 0},
+                    {1, 1, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 3;
+                next_shape = 4;
+            }
+        }
+        if(type_num == 4){
+            int[][] new_block = new int[][]{
+                    {1, 0, 0},
+                    {1, 1, 1},
+                    {0, 0, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 4;
+                next_shape = 4;
+            }
+        }
+    }
+    // rotation types for shape 5
+    // 4 types for shape 5
+    public void shape_5_next_types(int type_num){
+        if(type_num == 1){
+            int[][] new_block = new int[][]{
+                    {0, 0, 0},
+                    {1, 1, 1},
+                    {0, 1, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 1;
+                next_shape = 5;
+            }
+        }
+        if(type_num == 2){
+            int[][] new_block = new int[][]{
+                    {0, 1, 0},
+                    {1, 1, 0},
+                    {0, 1, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 2;
+                next_shape = 5;
+            }
+        }
+        if(type_num == 3){
+            int[][] new_block = new int[][]{
+                    {0, 1, 0},
+                    {1, 1, 1},
+                    {0, 0, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 3;
+                next_shape = 5;
+            }
+        }
+        if(type_num == 4){
+            int[][] new_block = new int[][]{
+                    {0, 1, 0},
+                    {0, 1, 1},
+                    {0, 1, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 4;
+                next_shape = 5;
+            }
+        }
+    }
+    // rotation types for shape 6
+    // 1 type for shape 6
+    public void shape_6_next_types(int type_num){
+        if(type_num == 1){
+            int[][] new_block = new int[][]{
+                    {0, 0, 0},
+                    {1, 1, 0},
+                    {1, 1, 0}
+            };
+            temp_block = new_block;
+            if(check_overlap(cur_row,cur_col)) {
+                next_block = new_block;
+                next_rotation_type = 1;
+                next_shape = 6;
+            }
+        }
+    }
+
+
+
+
+
+
 }
