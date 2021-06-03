@@ -32,67 +32,34 @@ private int period = 1000;
 
         window.setVisible(true);
 
-        timer_update();
-        /*
         // Create a timer
-        TimerTask timerTask = new TimerTask() {
-            @Override
+        startTimer();
+    }
+    
+    private void startTimer() {
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
             public void run() {
             	if(data.game_pause==false) {
                     moveDown();
+//                    System.out.println("Level: "+ data.level + "Period: " + period);
+
+                    if(Data.level == 1)
+                        period = 1000;
+                    if(Data.level == 2)
+                        period = 800;
+                    if(Data.level == 3)
+                        period = 500;
+                    if(Data.level == 4)
+                        period = 200;
+                    t.cancel();
+                    startTimer();
             	}
             }
-        };
-        Timer t = new Timer();
-        t.schedule(timerTask, 1000, period);
-         */
+        }, period, period);
     }
 
-    public void timer_update(){
-        Timer t = new Timer();
-        t.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if(data.game_pause==false) {
-                    moveDown();
-                }
-                if(Data.level == 1)
-                    period = 1000;
-                if(Data.level == 2)
-                    period = 800;
-                if(Data.level == 3)
-                    period = 500;
-                if(Data.level == 4)
-                    period = 200;
-                t.cancel();
-                timer_update();
-            }
-        }, 1000, period);
-
-        /*
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                if(data.game_pause==false) {
-                    moveDown();
-                }
-                if(Data.level == 1)
-                    period = 1000;
-                if(Data.level == 2)
-                    period = 800;
-                if(Data.level == 3)
-                    period = 500;
-                if(Data.level == 4)
-                    period = 200;
-                t.cancel();
-                timer_update();
-            }
-        };
-        t.schedule(timerTask, 1000, period);
-         */
-    }
-
-    // Function run by timer
+    // Function run by timerx
     // Auto move down block every second
     public void moveDown() {
         if(data.check("down")) {

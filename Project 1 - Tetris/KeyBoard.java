@@ -11,6 +11,15 @@ public class KeyBoard {
 //    Key board pressed event
     public static void keyPressed(KeyEvent e,Data data) {
 
+//    	DEBUG
+        if(e.getKeyCode()== KeyEvent.VK_Q) {
+        	data.score = data.score+2000;
+        }
+        if(e.getKeyCode()== KeyEvent.VK_E) {
+        	data.score = data.score-2000;
+        }
+//    	DEBUG
+        
         if(e.getKeyCode()== KeyEvent.VK_SPACE) {
           System.out.println("Paused");
           data.game_pause = !data.game_pause; //Reverse the boolean
