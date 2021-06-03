@@ -71,7 +71,7 @@ public class UI {
                 createBorder(cube,row, col, 25, 25);
             }
         }
-        
+
         // font for the word "Score"
         cube.setColor(Color.BLACK);
         cube.setFont(new Font("TimesRoman", Font.BOLD,30));
@@ -127,12 +127,12 @@ public class UI {
 
     	//Pause Game
     	if(data.game_pause==true) {
-    		
+
             cube.setColor(Color.BLACK);
             cube.fillRect(init_x, init_y, window_w, window_h);
             cube.setColor(Color.WHITE);
-            cube.setFont(new Font("TimesRoman", Font.PLAIN, 24)); 
-            
+            cube.setFont(new Font("TimesRoman", Font.PLAIN, 24));
+
             int text_x_offset = 30;
             cube.drawString("Paused", init_x+window_w/2 - text_x_offset, init_y+window_h/2);
     		return;
@@ -189,7 +189,7 @@ public class UI {
     }
 
     public static Music backgroundMusic(){
-        String filepath = "IMG_3056.wav";
+        String filepath = "music/Tetris_theme.wav";
 
         Music musicObject = new Music();
         musicObject.playBackgroundMusic(filepath);
@@ -197,7 +197,7 @@ public class UI {
     }
 
     public static void clearSoundEffect(){
-        String filepath = "clear_2.wav";
+        String filepath = "music/clear_2.wav";
         // String filepath = "clear_effect.wav";
 
         Music musicObject = new Music();
@@ -205,14 +205,14 @@ public class UI {
     }
 
     public static void touchBottomSoundEffect(){
-        String filepath = "hit_ground.wav";
+        String filepath = "music/hit_ground.wav";
 
         Music musicObject = new Music();
         musicObject.hitGroundEffect(filepath);
     }
 
     public static void gameOverSoundEffect(){
-        String filepath = "game_over.wav";
+        String filepath = "music/game_over.wav";
 
         Music musicObject = new Music();
         musicObject.playSoundEffect(filepath);

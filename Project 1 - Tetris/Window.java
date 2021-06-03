@@ -24,7 +24,7 @@ public class Window extends JPanel implements KeyListener {
     // Create a Game Window instance
     public void create() {
         // start the background music
-        String filepath = "IMG_3056.wav";
+        String filepath = "music/Tetris_theme.wav";
         musicObject.playBackgroundMusic(filepath);
 
         data.init();
@@ -38,23 +38,23 @@ public class Window extends JPanel implements KeyListener {
         // Create a timer
         startTimer();
     }
-    
+
     private void startTimer() {
         Timer t = new Timer();
         t.schedule(new TimerTask() {
             public void run() {
-            	
+
             	if(data.init_overlap) { //Make it lose
             	moveDown();
             	}
-            	
+
             	if(!data.check("bottom") && data.game_pause==false && (System.nanoTime()-data.last_drop_time)/1000000>=data.period) {
                     moveDown();
                     data.last_drop_time = System.nanoTime();
 //                    System.out.println("Level: "+ data.level + "Period: " + period);
             	}
             	checkHitBottom();
-            	
+
                 // set difficulties / level
                 if(data.score < 2000) {// 2000
                 	data.level = 1;
@@ -73,8 +73,8 @@ public class Window extends JPanel implements KeyListener {
                 	data.period = 200;
                 }
 //            	data.period = 10;
-                
-            	
+
+
             }
         }, 100, 100);
     }
@@ -90,7 +90,7 @@ public class Window extends JPanel implements KeyListener {
         this.validate();
         this.repaint();
     }
-    
+
     public void checkHitBottom() {
         //Check if the block hits bottom
         if(data.check("bottom")) {
