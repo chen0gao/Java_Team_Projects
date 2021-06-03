@@ -20,7 +20,7 @@ public class KeyBoard {
         }
 //    	DEBUG
         
-        if(e.getKeyCode()== KeyEvent.VK_SPACE) {
+        if(e.getKeyCode()== KeyEvent.VK_SPACE && data.game_over == false) {
           // System.out.println("Paused");
           data.game_pause = !data.game_pause; //Reverse the boolean
             if(data.game_pause){
