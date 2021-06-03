@@ -23,6 +23,9 @@ public class Window extends JPanel implements KeyListener {
 
     // Create a Game Window instance
     public void create() {
+        // start the background music
+        UI.backgroundMusic();
+
         data.init();
         window.add(this);
         window.setSize(500, 500);

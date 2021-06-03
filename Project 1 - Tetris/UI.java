@@ -187,4 +187,33 @@ public class UI {
 
         cube.drawString("Game Over",150,240);
     }
+
+    public static void backgroundMusic(){
+        String filepath = "IMG_3056.wav";
+
+        Music musicObject = new Music();
+        musicObject.playBackgroundMusic(filepath);
+    }
+
+    public static void clearSoundEffect(){
+        String filepath = "clear_2.wav";
+        // String filepath = "clear_effect.wav";
+
+        Music musicObject = new Music();
+        musicObject.playSoundEffect(filepath);
+    }
+
+    public static void touchBottomSoundEffect(){
+        String filepath = "hit_ground.wav";
+
+        Music musicObject = new Music();
+        musicObject.hitGroundEffect(filepath);
+    }
+
+    public static void gameOverSoundEffect(){
+        String filepath = "game_over.wav";
+
+        Music musicObject = new Music();
+        musicObject.playSoundEffect(filepath);
+    }
 }

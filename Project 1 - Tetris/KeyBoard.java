@@ -1,6 +1,4 @@
 import java.awt.event.KeyEvent;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class KeyBoard {
     public static void keyReleased(KeyEvent e,Data data) {
@@ -23,7 +21,7 @@ public class KeyBoard {
 //    	DEBUG
         
         if(e.getKeyCode()== KeyEvent.VK_SPACE) {
-          System.out.println("Paused");
+          // System.out.println("Paused");
           data.game_pause = !data.game_pause; //Reverse the boolean
         }
         

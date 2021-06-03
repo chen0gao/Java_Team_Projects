@@ -16,11 +16,12 @@ public class Data {
     public static double rotate_time_cooldown = 200; //Cooldown to rotate, in ms
 
     public static long last_drop_time = System.nanoTime();
-    public static long block_drop_cooldown = 150; //Cooldown before fixed to ground
+    public static long block_drop_cooldown = 200; //Cooldown before fixed to ground
     public static boolean first_time = true;
 
     public static boolean game_pause = false; //Pause the game
     public static boolean init_overlap;
+    public static boolean game_over = false;
 
     public static int score;
     public static int level;
@@ -151,6 +152,16 @@ public class Data {
         check_all_rows();
         if(!init_overlap)
             init();
+
+        // add hit ground sound effect
+        if(!init_overlap)
+            UI.touchBottomSoundEffect();
+
+        if(init_overlap && !game_over) {
+            // add sound effect
+            UI.gameOverSoundEffect();
+            game_over = true;
+        }
     }
 
     //    Check if a direction is overlapping
@@ -665,6 +676,10 @@ public class Data {
             score += 250;
         else if (line_cleared == 3)
             score += 450;
+
+        // add sound effect
+        if(line_cleared != 0)
+            UI.clearSoundEffect();
     }
 
     // clear the line which is filled with blocks
