@@ -9,7 +9,7 @@ public class KeyBoard {
     }
 
 //    Key board pressed event
-    public static void keyPressed(KeyEvent e,Data data) {
+    public static void keyPressed(KeyEvent e,Data data, Music music) {
 
 //    	DEBUG
         if(e.getKeyCode()== KeyEvent.VK_Q) {
@@ -23,6 +23,14 @@ public class KeyBoard {
         if(e.getKeyCode()== KeyEvent.VK_SPACE) {
           // System.out.println("Paused");
           data.game_pause = !data.game_pause; //Reverse the boolean
+            if(data.game_pause){
+                music.pause();
+                // System.out.println("It is now paused");
+            }
+            else {
+                music.resume();
+                // System.out.println("It is now resumed");
+            }
         }
         
         if(data.game_pause==false) {

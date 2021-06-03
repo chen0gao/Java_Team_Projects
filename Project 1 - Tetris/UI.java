@@ -167,12 +167,12 @@ public class UI {
                 createBorder(cube,x,y,w,h);
 
                 //Debug Mode - show array number
-                if (system[row][col] != 0) {
-                cube.setColor(Color.WHITE);
-                } else {
-                cube.setColor(Color.BLACK);
-                }
-                cube.drawString(String.valueOf(system[row][col]), x+w/2, y+h/2);
+                // if (system[row][col] != 0) {
+                // cube.setColor(Color.WHITE);
+                // } else {
+                // cube.setColor(Color.BLACK);
+                // }
+                // cube.drawString(String.valueOf(system[row][col]), x+w/2, y+h/2);
             }
         }
     }
@@ -188,11 +188,12 @@ public class UI {
         cube.drawString("Game Over",150,240);
     }
 
-    public static void backgroundMusic(){
+    public static Music backgroundMusic(){
         String filepath = "IMG_3056.wav";
 
         Music musicObject = new Music();
         musicObject.playBackgroundMusic(filepath);
+        return musicObject;
     }
 
     public static void clearSoundEffect(){

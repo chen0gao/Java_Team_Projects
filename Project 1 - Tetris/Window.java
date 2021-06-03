@@ -20,11 +20,12 @@ public class Window extends JPanel implements KeyListener {
     private JFrame window = new JFrame("Tetris Game Window"); //Global
 //    Create a data instance, handling backend
     Data data = new Data();
-
+    Music musicObject = new Music();
     // Create a Game Window instance
     public void create() {
         // start the background music
-        UI.backgroundMusic();
+        String filepath = "IMG_3056.wav";
+        musicObject.playBackgroundMusic(filepath);
 
         data.init();
         window.add(this);
@@ -122,7 +123,7 @@ public class Window extends JPanel implements KeyListener {
 //    Handle keyboard event
 //    All keyboard event related is moved to KeyBoard.java
     public void keyPressed(KeyEvent e) {
-        KeyBoard.keyPressed(e,data);
+        KeyBoard.keyPressed(e,data, musicObject);
 
         this.invalidate();
         this.validate();
