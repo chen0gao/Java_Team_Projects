@@ -17,6 +17,10 @@ public class Music {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 clip = AudioSystem.getClip();
                 clip.open(audioInput);
+
+                FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                volume.setValue(-10);
+
                 // start playing audio
                 clip.start();
                 // keep looping forever
@@ -43,14 +47,22 @@ public class Music {
 
     void pause(){
         clipTimePosition = clip.getMicrosecondPosition();
-             clip.stop();
-             // System.out.println("Paused");
+        clip.stop();
+        // System.out.println("Paused");
     }
 
     void resume(){
+        while (clipTimePosition >= 8.3e+7){
+            clipTimePosition -= 8.3e+7;
+        }
         clip.setMicrosecondPosition(clipTimePosition);
-             clip.start();
-             // System.out.println("Resumed");
+
+        FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        volume.setValue(-10);
+        
+        clip.start();
+        // System.out.println("Resumed");
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     void playSoundEffect(String musicLocation){
