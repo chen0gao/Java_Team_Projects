@@ -99,7 +99,7 @@ public class Window extends JPanel implements KeyListener {
             drop_t.schedule(new TimerTask() {
                 public void run() {
                 	if(data.game_pause==false && data.check("bottom")) { //Check if at bottom again
-                        data.fixed();
+                        data.fixed(musicObject);
                         drop_t.cancel();
                 	} else {
                         drop_t.cancel();

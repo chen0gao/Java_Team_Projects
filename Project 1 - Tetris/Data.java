@@ -142,7 +142,7 @@ public class Data {
 
     //    Once hit bottom, set the blocks into fixed
     //    check if any row need to be cleared, then start a new block
-    public void fixed() {
+    public void fixed(Music music) {
         for (int row = 0; row < cur_block.length; row++) {
             for (int col = 0; col < cur_block[row].length; col++) {
                 if (cur_block[row][col] == 1)
@@ -160,6 +160,7 @@ public class Data {
         if(init_overlap && !game_over) {
             // add sound effect
             UI.gameOverSoundEffect();
+            music.pause();
             game_over = true;
         }
     }
@@ -335,8 +336,8 @@ public class Data {
         if(type_num == 1){
             int[][] new_block = new int[][]{
                     {0, 0, 0},
-                    {0, 1, 1},
-                    {0, 1, 0}
+                    {1, 1, 0},
+                    {1, 0, 0}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -348,8 +349,8 @@ public class Data {
         if(type_num == 2){
             int[][] new_block = new int[][]{
                     {0, 0, 0},
-                    {0, 1, 1},
-                    {0, 0, 1}
+                    {1, 1, 0},
+                    {0, 1, 0}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -361,8 +362,8 @@ public class Data {
         if(type_num == 3){
             int[][] new_block = new int[][]{
                     {0, 0, 0},
-                    {0, 0, 1},
-                    {0, 1, 1}
+                    {0, 1, 0},
+                    {1, 1, 0}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
@@ -374,8 +375,8 @@ public class Data {
         if(type_num == 4){
             int[][] new_block = new int[][]{
                     {0, 0, 0},
-                    {0, 1, 0},
-                    {0, 1, 1}
+                    {1, 0, 0},
+                    {1, 1, 0}
             };
             temp_block = new_block;
             if(check_overlap(cur_row,cur_col)) {
