@@ -14,6 +14,9 @@ public class Data {
     public static int next_rotation_type;
     public static long rotate_time = System.nanoTime();
     public static double rotate_time_cooldown = 200; //Cooldown to rotate, in ms
+
+    public static long last_drop_time = System.nanoTime();
+    public static long block_drop_cooldown = 150; //Cooldown before fixed to ground
     public static boolean first_time = true;
 
     public static boolean game_pause = false; //Pause the game
@@ -21,6 +24,8 @@ public class Data {
 
     public static int score;
     public static int level;
+
+    public static int period;
 
     //    Initialize the game
     // true for overlapped, false for not overlapped
@@ -42,28 +47,29 @@ public class Data {
             // System.out.println("NOT Initial");
         }
 
-        // set difficulties / level
-        if(score < 2000) // 2000
-            level = 1;
-        else if(score < 5000) // 5000
-            level = 2;
-        else if(score < 10000) // 10000
-            level = 3;
-        else
-            level = 4;
-
         // System.out.println("Current Score: " + score);
         // test, set 13-2 a pre fixed block
         // system[13][2] = 10;
 
-        render_block();
-
-        if(check_overlap(cur_row+1,cur_col))
+        if(check_overlap(cur_row+1,cur_col)) {
             init_overlap = false;
+        }
 //            System.out.println("OK, does not overlap");
-        else
-            init_overlap = true;
+        else {
+
+        	try
+        	{
+        	    Thread.sleep(1000);
+                init_overlap = true;
+        	}
+        	catch(InterruptedException ex)
+        	{
+        	    Thread.currentThread().interrupt();
+        	}
 //            System.out.println("Overlapped!!");
+        }
+
+        render_block();
     }
 
     //    print current block matrix into game matrix
@@ -145,8 +151,6 @@ public class Data {
         check_all_rows();
         if(!init_overlap)
             init();
-        // system[cur_row][cur_col] = 10;
-        // init();
     }
 
     //    Check if a direction is overlapping

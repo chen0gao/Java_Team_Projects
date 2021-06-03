@@ -1,4 +1,6 @@
 import java.awt.event.KeyEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class KeyBoard {
     public static void keyReleased(KeyEvent e,Data data) {
@@ -43,15 +45,10 @@ public class KeyBoard {
                 }
             }
             else if(e.getKeyCode()== KeyEvent.VK_DOWN) {
-                if(data.check("down")) {
+                if(data.check("down") && !data.check("bottom")) {
                     data.move("down");
                 }
 
-            }
-
-            //Check if hit bottom
-            if(data.check("bottom")) {
-                data.fixed();
             }
         }
     }
