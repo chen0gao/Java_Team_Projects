@@ -9,6 +9,40 @@ public class UI {
         cube.drawLine(x + w, y, x + w, y + h); //Right
     }
 
+    // create the main border line
+    public static void createMainBorder(Graphics cube, Data data) {
+        int w = 25; //width of block
+        int h = 25; //height of block
+        int[][] system = data.system;
+        int window_w = w*system[0].length; //width of game window
+        int window_h = h*system.length; //height of game window
+        Graphics2D cube_2 = (Graphics2D) cube;
+        cube_2.setColor(Color.BLACK);
+        Stroke stroke = new BasicStroke(12f);
+        cube_2.setStroke(stroke);
+        cube_2.drawLine(25, 25, 25 + window_w, 25); //Top
+        cube_2.drawLine(25, 25, 25, 25 + window_h); //Bottom
+        cube_2.drawLine(25+window_w, 25, 25+window_w, 25 + window_h); //Left
+        cube_2.drawLine(25, 25+window_h, 25 + window_w, 25 + window_h); //Right
+
+        cube_2.setColor(Color.BLACK);
+        cube_2.setStroke(new BasicStroke(1f));
+    }
+
+    // board color
+    public static void paintBoardColor(Graphics cube, Data data){
+        int[][] system = data.system;
+        int window_w = 25*system[0].length; //width of game window
+        int window_h = 25*system.length; //height of game window
+
+        Graphics2D cube_2 = (Graphics2D) cube;
+        Color color1 = Color.CYAN;
+        Color color2 = Color.BLUE;
+        GradientPaint gradientPaint = new GradientPaint(0,0,color1,0,window_h,color2);
+        cube_2.setPaint(gradientPaint);
+        cube_2.fillRect(25,25,window_w,window_h);
+    }
+
 //    Paint the game board based on the backend
     public static void paintBoard(Graphics cube,Data data) {
 
@@ -20,6 +54,9 @@ public class UI {
         int h = 25; //height of block
 		int window_w = w*system[0].length; //width of game window
 		int window_h = h*system.length; //height of game window
+
+        createMainBorder(cube,data);
+        paintBoardColor(cube,data);
 
         // create our own colors
         Color color_1 = new Color(255,204,0); // orange
@@ -35,6 +72,7 @@ public class UI {
 
         // print word "NEXT"
         cube.setFont(new Font("TimesRoman", Font.BOLD,20));
+        cube.setColor(Color.BLACK);
         cube.drawString("NEXT",right_side_init_x + 55,right_side_init_y - 8);
 
         // grid
@@ -143,7 +181,8 @@ public class UI {
             for (int col = 0; col < system[row].length; col++) {
                 // Different block color based on the value
                 if (system[row][col] == 0) {
-                    cube.setColor(Color.WHITE);
+                    Color c = new Color(0,0,0,0);
+                    cube.setColor(c);
                 } else if (system[row][col] == 1 && Data.current_shape == 1) {
                     cube.setColor(color_1);
                 } else if (system[row][col] == 1 && Data.current_shape == 2) {
@@ -164,7 +203,8 @@ public class UI {
                 cube.fillRect(x, y, w, h);
                 //Border
                 cube.setColor(Color.BLACK);
-                createBorder(cube,x,y,w,h);
+                if(system[row][col] == 1 || system[row][col] == 10)
+                    createBorder(cube,x,y,25,25);
 
                 //Debug Mode - show array number
                 // if (system[row][col] != 0) {
