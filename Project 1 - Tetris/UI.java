@@ -227,8 +227,17 @@ public class UI {
 
         cube.drawString("Game Over",150,230);
         
-        if(data.game_restart == true)
-        cube.drawString("Press Space to Restart",50,280);
+        if(data.game_restart == true) {
+            cube.setFont(new Font("TimesRoman", Font.BOLD, 20));
+            cube.drawString("Press Space to Restart", 145, 280);
+        }
+
+        cube.setFont(new Font("SansSerif", Font.BOLD,10));
+        cube.drawString("Project 1 - Tetris @ June 7, 2021",175,400);
+        cube.drawString("By",250,415);
+        cube.drawString("Yuhao Dong",225,430);
+        cube.drawString("Chen Gao",230,445);
+
     }
 
     public static Music backgroundMusic(){
