@@ -167,7 +167,7 @@ public class UI {
     	if(data.game_pause==true) {
 
             cube.setColor(Color.BLACK);
-            cube.fillRect(init_x, init_y, window_w, window_h);
+            cube.fillRect(init_x, init_y - 5, window_w, window_h + 5);
             cube.setColor(Color.WHITE);
             cube.setFont(new Font("TimesRoman", Font.PLAIN, 24));
 
