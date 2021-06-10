@@ -22,6 +22,7 @@ public class Data {
     public static boolean game_pause = false; //Pause the game
     public static boolean init_overlap;
     public static boolean game_over = false;
+    public static boolean game_restart = false;
 
     public static int score;
     public static int level;
@@ -62,6 +63,8 @@ public class Data {
         	{
         	    Thread.sleep(1000);
                 init_overlap = true;
+        	    Thread.sleep(2000);
+                game_restart = true;
         	}
         	catch(InterruptedException ex)
         	{
@@ -154,7 +157,7 @@ public class Data {
             init();
 
         // add hit ground sound effect
-        if(!init_overlap)
+        if(!init_overlap && !game_over && !game_restart)
             UI.touchBottomSoundEffect();
 
         if(init_overlap && !game_over) {
@@ -236,6 +239,27 @@ public class Data {
                 system[cur_row + row][cur_col + col] = 0;
             }
         }
+    }
+    
+    public void restart() {
+        game_restart = false;
+    	//reset all block first
+        for (int row = 0; row < system.length; row++) {
+            for (int col = 0; col < system[0].length; col++) {
+            	system[row][col] = 0;
+            }
+        }
+        //reset all value
+        game_pause = false;
+        init_overlap = false;
+        game_over = false;
+
+        score =  0;
+        level = 1;
+        period = 1000;
+        
+        first_time = false;
+        init();
     }
 
     //    Move the block

@@ -20,17 +20,22 @@ public class KeyBoard {
         }
 //    	DEBUG
         
-        if(e.getKeyCode()== KeyEvent.VK_SPACE && data.game_over == false) {
-          // System.out.println("Paused");
-          data.game_pause = !data.game_pause; //Reverse the boolean
-            if(data.game_pause){
-                music.pause();
-                // System.out.println("It is now paused");
-            }
-            else {
-                music.resume();
-                // System.out.println("It is now resumed");
-            }
+        if(e.getKeyCode()== KeyEvent.VK_SPACE) {
+        	
+        	if(data.game_over == false && data.game_restart == false) {
+                // System.out.println("Paused");
+                data.game_pause = !data.game_pause; //Reverse the boolean
+                  if(data.game_pause){
+                      music.pause();
+                      // System.out.println("It is now paused");
+                  }
+                  else {
+                      music.resume();
+                      // System.out.println("It is now resumed");
+                  }
+        	} else if(data.game_restart == true) {
+        		data.restart();
+        	}
         }
         
         if(data.game_pause==false) {

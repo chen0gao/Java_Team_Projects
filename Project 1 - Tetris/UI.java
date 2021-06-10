@@ -217,7 +217,7 @@ public class UI {
         }
     }
 
-    public static void gameOver(Graphics cube){//, JFrame window){
+    public static void gameOver(Graphics cube,Data data){//, JFrame window){
         //int x = window.getX();
         //int y = window.getY();
         cube.setColor(Color.BLACK);
@@ -225,7 +225,10 @@ public class UI {
         cube.setColor(Color.lightGray);
         cube.setFont(new Font("TimesRoman", Font.BOLD, 40));
 
-        cube.drawString("Game Over",150,240);
+        cube.drawString("Game Over",150,230);
+        
+        if(data.game_restart == true)
+        cube.drawString("Press Space to Restart",50,280);
     }
 
     public static Music backgroundMusic(){

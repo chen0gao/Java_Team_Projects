@@ -73,8 +73,11 @@ public class Window extends JPanel implements KeyListener {
                 	data.period = 200;
                 }
 //            	data.period = 10;
-
-
+                //fix the restart bug
+                if(data.game_restart == true && data.game_over == false) {
+                	data.game_restart = false;
+                }
+                
             }
         }, 100, 100);
     }
@@ -117,7 +120,7 @@ public class Window extends JPanel implements KeyListener {
         UI.paintBoard(cube,data);
 
         if(data.init_overlap)
-            UI.gameOver(cube);//,window);
+            UI.gameOver(cube,data);//,window);
     }
 
 //    Handle keyboard event
