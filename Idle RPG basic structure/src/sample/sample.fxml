@@ -26,18 +26,15 @@
     </top>
 
     <center>
-        <GridPane hgap="10" vgap="10" alignment="CENTER">
-            <Label GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2" text="Player" alignment="CENTER"/>
-            <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="HP: " alignment="CENTER"/>
-            <Label GridPane.rowIndex="1" GridPane.columnIndex="1" text="100/100" alignment="CENTER"/>
-            <Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="XP: " alignment="CENTER"/>
-            <Label GridPane.rowIndex="2" GridPane.columnIndex="1" text="100/100" alignment="CENTER"/>
+        <GridPane hgap="10" vgap="10" alignment="CENTER" fx:id="ui" >
+            <Label GridPane.rowIndex="0" GridPane.columnIndex="0" fx:id="player_name" GridPane.columnSpan="2" text="Player" alignment="CENTER"/>
+            <Label GridPane.rowIndex="1" GridPane.columnIndex="0" fx:id="player_hp" text="HP: 100/100" alignment="CENTER"/>
+            <Label GridPane.rowIndex="2" GridPane.columnIndex="0" fx:id="player_xp" text="XP: 100/100" alignment="CENTER"/>
 
-            <Label GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.columnSpan="2" text="Monster" alignment="CENTER"/>
-            <Label GridPane.rowIndex="1" GridPane.columnIndex="2" text="HP: " alignment="CENTER"/>
-            <Label GridPane.rowIndex="1" GridPane.columnIndex="3"  text="100/100" alignment="CENTER"/>
+            <Label GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="monster_name" GridPane.columnSpan="4" text="Monster" alignment="CENTER"/>
+            <Label GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="monster_hp" text="HP: 17/17" alignment="CENTER"/>
 
-            <Label GridPane.rowIndex="4" GridPane.columnIndex="0" text="EVENT DESCRIPTION" GridPane.columnSpan="3" wrapText="true"/>
+            <Label GridPane.rowIndex="5" GridPane.columnIndex="0" fx:id="message1" text="EVENT DESCRIPTION" GridPane.columnSpan="3" wrapText="true"/>
         </GridPane>
     </center>
 
